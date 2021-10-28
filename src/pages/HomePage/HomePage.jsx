@@ -18,7 +18,9 @@ export function HomePage() {
         {movies &&
           movies.map(movie => (
             <li key={movie.id}>
-              <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
+              <Link to={`/movies/${movie.id}`}>{`${
+                movie.title
+              } (${movie.release_date.substring(0, 4)})`}</Link>
             </li>
           ))}
       </ul>

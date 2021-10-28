@@ -7,8 +7,22 @@ function fetchTrendingMovies() {
   );
 }
 
+function fetchMovie(query) {
+  return fetch(
+    `${BASE_URL}/search/movie?query=${query}&language=en-US&api_key=${KEY}`,
+  ).then(response => response.json());
+}
+
+function fetchMovieDetail(id) {
+  return fetch(`${BASE_URL}/movie/${id}?language=en-US&api_key=${KEY}`).then(
+    response => response.json(),
+  );
+}
+
 const api = {
   fetchTrendingMovies,
+  fetchMovie,
+  fetchMovieDetail,
 };
 
 export default api;

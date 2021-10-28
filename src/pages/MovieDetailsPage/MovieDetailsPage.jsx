@@ -20,7 +20,12 @@ export function MovieDetailsPage() {
         <div>
           <img src={`${BASE_IMG_URL}${movie.poster_path}`} alt="" />
           <div>
-            <h1>{`${movie.title} (${movie.release_date.substring(0, 4)})`}</h1>
+            <h1>
+              {movie.title}{' '}
+              {movie.release_date
+                ? `(${movie.release_date.substring(0, 4)})`
+                : movie.release_date}
+            </h1>
             <p>User Score: {movie.vote_average}</p>
             <h2>Overwiew</h2>
             <p>{movie.overview}</p>

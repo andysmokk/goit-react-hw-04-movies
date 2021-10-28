@@ -9,8 +9,6 @@ export function HomePage() {
     moviesAPI.fetchTrendingMovies().then(movies => setMovies(movies.results));
   }, []);
 
-  console.log(movies);
-
   return (
     <>
       <h1>Trending today</h1>
@@ -18,9 +16,12 @@ export function HomePage() {
         {movies &&
           movies.map(movie => (
             <li key={movie.id}>
-              <Link to={`/movies/${movie.id}`}>{`${
-                movie.title
-              } (${movie.release_date.substring(0, 4)})`}</Link>
+              <Link to={`/movies/${movie.id}`}>
+                {movie.title}{' '}
+                {movie.release_date
+                  ? `(${movie.release_date.substring(0, 4)})`
+                  : movie.release_date}
+              </Link>
             </li>
           ))}
       </ul>

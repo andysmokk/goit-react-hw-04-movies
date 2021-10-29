@@ -7,7 +7,7 @@ const BASE_IMG_URL_CAST = 'https://image.tmdb.org/t/p/w300';
 
 function Cast({ movieId }) {
   //   const { movieId } = useParams();
-  const [casts, setCasts] = useState(null);
+  const [casts, setCasts] = useState([]);
 
   useEffect(() => {
     moviesAPI.fetchMovieCast(movieId).then(data => setCasts(data.cast));
@@ -15,7 +15,7 @@ function Cast({ movieId }) {
 
   console.log(casts);
 
-  return (
+  return casts.length !== 0 ? (
     <ul>
       {casts &&
         casts.map(cast => (
@@ -37,6 +37,8 @@ function Cast({ movieId }) {
           </li>
         ))}
     </ul>
+  ) : (
+    <p>No information</p>
   );
 }
 

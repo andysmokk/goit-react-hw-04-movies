@@ -25,11 +25,18 @@ function fetchMovieCast(id) {
   ).then(response => response.json());
 }
 
+function fetchMovieReviews(id) {
+  return fetch(
+    `${BASE_URL}/movie/${id}/reviews?language=en-US&api_key=${KEY}`,
+  ).then(response => response.json());
+}
+
 const api = {
   fetchTrendingMovies,
   fetchMovie,
   fetchMovieDetail,
   fetchMovieCast,
+  fetchMovieReviews,
 };
 
 export default api;

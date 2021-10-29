@@ -1,12 +1,17 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router';
+import { Route, Switch, useParams } from 'react-router';
 import moviesAPI from '../../services/moviesApi';
+import Cast from '../../components/Cast/Cast';
+import { Link, useRouteMatch } from 'react-router-dom';
 
 const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w500';
 
 export function MovieDetailsPage() {
+  const match = useRouteMatch();
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
+
+  console.log(match);
 
   useEffect(() => {
     moviesAPI.fetchMovieDetail(movieId).then(movie => setMovie(movie));
@@ -41,6 +46,24 @@ export function MovieDetailsPage() {
           </div>
         </div>
       )}
+      <hr />
+      <div>
+        <h2>Additional information</h2>
+        <ul>
+          <li>
+            <Link to={`${match.url}/cast`}>Cast</Link>
+          </li>
+          <li>
+            <Link>Reviews</Link>
+          </li>
+        </ul>
+        <hr />
+      </div>
+      <Switch>
+        <Route path={`${match.path}/cast`}>
+          <Cast movieId={movieId} />
+        </Route>
+      </Switch>
     </>
   );
 }

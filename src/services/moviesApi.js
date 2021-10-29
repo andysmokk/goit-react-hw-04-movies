@@ -19,10 +19,17 @@ function fetchMovieDetail(id) {
   );
 }
 
+function fetchMovieCast(id) {
+  return fetch(
+    `${BASE_URL}/movie/${id}/credits?language=en-US&api_key=${KEY}`,
+  ).then(response => response.json());
+}
+
 const api = {
   fetchTrendingMovies,
   fetchMovie,
   fetchMovieDetail,
+  fetchMovieCast,
 };
 
 export default api;

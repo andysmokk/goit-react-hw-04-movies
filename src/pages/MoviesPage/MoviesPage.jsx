@@ -31,7 +31,7 @@ export function MoviesPage() {
   const onSubmitForm = e => {
     e.preventDefault();
 
-    if (e.target[0].value === '') {
+    if (!e.target[0].value) {
       return;
     }
     // console.log(e.target[0].value);

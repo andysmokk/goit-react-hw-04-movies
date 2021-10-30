@@ -18,20 +18,22 @@ export function MoviesPage() {
   console.log(location.search);
 
   useEffect(() => {
-    if (!movieName) {
+    if (!getQuery) {
       return;
     }
-    moviesAPI.fetchMovie(movieName).then(movies => setMovies(movies.results));
-  }, [movieName]);
-  // useEffect(() => {
-  //   if (!movieName) {
-  //     return;
-  //   }
-  //   moviesAPI.fetchMovie(movieName).then(movies => setMovies(movies.results));
-  // }, []);
+
+    moviesAPI
+      .fetchMovie(getQuery)
+      .then(movies => setMovies(movies.results))
+      .catch(error => console.log(error));
+  }, [getQuery]);
 
   const onSubmitForm = e => {
     e.preventDefault();
+
+    if (e.target[0].value === '') {
+      return;
+    }
     // console.log(e.target[0].value);
     setMovieName(e.target[0].value);
 
@@ -42,9 +44,14 @@ export function MoviesPage() {
     // if (!movieName) {
     //   return;
     // }
-    // moviesAPI.fetchMovie(movieName).then(movies => setMovies(movies.results));
+    moviesAPI
+      .fetchMovie(e.target[0].value)
+      .then(movies => setMovies(movies.results))
+      .catch(error => console.log(error))
+      .finally((e.target[0].value = ''));
   };
 
+  // const reset = () => setMovieName('');
   console.log(movieName);
   // const onChangeMovieName = ({ target }) => {
   //   setMovieName(target.value);
@@ -59,7 +66,7 @@ export function MoviesPage() {
       <form onSubmit={onSubmitForm}>
         <input
           // name="movieName"
-          defaultValue={movieName}
+          // defaultValue={movieName}
           type="text"
           autoComplete="off"
           autoFocus

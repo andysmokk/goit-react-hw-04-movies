@@ -23,7 +23,7 @@ export function MovieDetailsPage() {
 
   // console.log(movie);
 
-  const onClickGoBack = () => {
+  const onClickGoBack = e => {
     history.push(location?.state?.from?.location ?? '/');
     // history.goBack();
   };
@@ -44,7 +44,7 @@ export function MovieDetailsPage() {
                 : movie.release_date}
             </h1>
             <p>User Score: {movie.vote_average}</p>
-            <h2>Overwiew</h2>
+            <h2>Overview</h2>
             <p>{movie.overview}</p>
             <h2>Genres</h2>
             <div>

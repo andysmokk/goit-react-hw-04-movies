@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Route, Switch, useParams } from 'react-router';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link, useRouteMatch, useHistory, useLocation } from 'react-router-dom';
 import moviesAPI from '../../services/moviesApi';
 import Cast from '../../components/Cast/Cast';
 import Reviews from '../../components/Reviews/Reviews';
@@ -9,10 +9,13 @@ const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w500';
 
 export function MovieDetailsPage() {
   const match = useRouteMatch();
+  const history = useHistory();
+  const location = useLocation();
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
 
-  // console.log(match);
+  // console.log(history);
+  // console.log(location);
 
   useEffect(() => {
     moviesAPI.fetchMovieDetail(movieId).then(movie => setMovie(movie));
@@ -20,8 +23,16 @@ export function MovieDetailsPage() {
 
   // console.log(movie);
 
+  const onClickGoBack = () => {
+    history.push(location?.state?.from?.location ?? '/');
+    // history.goBack();
+  };
+
   return (
     <>
+      <button type="submit" onClick={onClickGoBack}>
+        {location?.state?.from?.label ?? 'GO BACK'}
+      </button>
       {movie && (
         <div>
           <img src={`${BASE_IMG_URL}${movie.poster_path}`} alt="" />
@@ -52,10 +63,28 @@ export function MovieDetailsPage() {
         <h2>Additional information</h2>
         <ul>
           <li>
-            <Link to={`${match.url}/cast`}>Cast</Link>
+            <Link
+              to={{
+                pathname: `${match.url}/cast`,
+                state: {
+                  from: { location, label: 'GO BACK' },
+                },
+              }}
+            >
+              Cast
+            </Link>
           </li>
           <li>
-            <Link to={`${match.url}/reviews`}>Reviews</Link>
+            <Link
+              to={{
+                pathname: `${match.url}/reviews`,
+                state: {
+                  from: { location, label: 'GO BACK' },
+                },
+              }}
+            >
+              Reviews
+            </Link>
           </li>
         </ul>
         <hr />

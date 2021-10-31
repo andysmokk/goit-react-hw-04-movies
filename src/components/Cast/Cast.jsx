@@ -1,11 +1,12 @@
 // import { Link } from 'react-router-dom';
 // import { useParams } from 'react-router';
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import moviesAPI from '../../services/moviesApi';
 
 const BASE_IMG_URL_CAST = 'https://image.tmdb.org/t/p/w300';
 
-function Cast({ movieId }) {
+export default function Cast({ movieId }) {
   //   const { movieId } = useParams();
   const [casts, setCasts] = useState([]);
 
@@ -42,4 +43,6 @@ function Cast({ movieId }) {
   );
 }
 
-export default Cast;
+Cast.propTypes = {
+  movieId: PropTypes.string.isRequired,
+};

@@ -1,6 +1,12 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
 import { Route, Switch, useParams } from 'react-router';
-import { Link, useRouteMatch, useHistory, useLocation } from 'react-router-dom';
+import {
+  NavLink,
+  useRouteMatch,
+  useHistory,
+  useLocation,
+} from 'react-router-dom';
+import s from './MovieDetailsPage.module.css';
 import moviesAPI from '../../services/moviesApi';
 
 const Cast = lazy(() =>
@@ -12,7 +18,7 @@ const Reviews = lazy(() =>
   ),
 );
 
-const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w500';
+const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w300';
 
 export default function MovieDetailsPage() {
   const match = useRouteMatch();
@@ -32,30 +38,34 @@ export default function MovieDetailsPage() {
 
   return (
     <>
-      <button type="submit" onClick={onClickGoBack}>
+      <button type="submit" onClick={onClickGoBack} className={s.button}>
         {location?.state?.from?.label ?? 'GO BACK'}
       </button>
       {movie && (
-        <div>
-          <img src={`${BASE_IMG_URL}${movie.poster_path}`} alt="" />
-          <div>
-            <h1>
+        <div className={s.box}>
+          <img
+            src={`${BASE_IMG_URL}${movie.poster_path}`}
+            alt=""
+            className={s.img}
+          />
+          <div className={s.description}>
+            <h1 className={s.title}>
               {movie.title}{' '}
               {movie.release_date
                 ? `(${movie.release_date.substring(0, 4)})`
                 : movie.release_date}
             </h1>
-            <p>User Score: {movie.vote_average}</p>
-            <h2>Overview</h2>
-            <p>{movie.overview}</p>
-            <h2>Genres</h2>
+            <p className={s.text}>User Score: {movie.vote_average}</p>
+            <h2 className={s.title}>Overview</h2>
+            <p className={`${s.overview} + ${s.text}`}>{movie.overview}</p>
+            <h2 className={s.title}>Genres</h2>
             <div>
-              {movie.genres &&
-                movie.genres.map(genre => (
-                  <ul key={genre.id}>
-                    <li>{genre.name}</li>
-                  </ul>
-                ))}
+              <ul className={`${s.list} + ${s.text}`}>
+                {movie.genres &&
+                  movie.genres.map(genre => (
+                    <li key={genre.id}>{genre.name}</li>
+                  ))}
+              </ul>
             </div>
           </div>
         </div>
@@ -63,9 +73,10 @@ export default function MovieDetailsPage() {
       <hr />
       <div>
         <h2>Additional information</h2>
-        <ul>
+        <ul className={`${s.list} + ${s.text}`}>
           <li>
-            <Link
+            <NavLink
+              className={s.pages}
               to={{
                 pathname: `${match.url}/cast`,
                 state: {
@@ -74,10 +85,11 @@ export default function MovieDetailsPage() {
               }}
             >
               Cast
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link
+            <NavLink
+              className={s.pages}
               to={{
                 pathname: `${match.url}/reviews`,
                 state: {
@@ -86,7 +98,7 @@ export default function MovieDetailsPage() {
               }}
             >
               Reviews
-            </Link>
+            </NavLink>
           </li>
         </ul>
         <hr />

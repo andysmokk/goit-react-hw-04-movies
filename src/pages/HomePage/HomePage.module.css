@@ -1,0 +1,12 @@
+.title {
+  margin-bottom: 15px;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+}
+
+.item {
+  padding: 4px;
+}

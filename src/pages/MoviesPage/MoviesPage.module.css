@@ -1,0 +1,32 @@
+.form {
+  padding: 10px;
+}
+
+.button {
+  margin-left: 10px;
+  cursor: pointer;
+  padding: 5.5px;
+  background-color: rgba(104, 124, 238, 0.582);
+  border: 1px solid black;
+  border-radius: 3px;
+}
+
+.button:hover,
+.button:focus {
+  background-color: rgba(34, 34, 184, 0.918);
+  color: white;
+}
+
+.input {
+  padding: 4px;
+  font-size: 14px;
+}
+
+.list {
+  padding: 0;
+}
+
+.item {
+  padding: 4px;
+  list-style: none;
+}

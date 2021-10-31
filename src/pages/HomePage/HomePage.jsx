@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import s from './HomePage.module.css';
 import moviesAPI from '../../services/moviesApi';
 
 export default function HomePage() {
@@ -12,11 +13,11 @@ export default function HomePage() {
 
   return (
     <>
-      <h1>Trending today</h1>
-      <ul>
+      <h1 className={s.title}>Trending today</h1>
+      <ul className={s.list}>
         {movies &&
           movies.map(movie => (
-            <li key={movie.id}>
+            <li key={movie.id} className={s.item}>
               <Link
                 to={{
                   pathname: `/movies/${movie.id}`,

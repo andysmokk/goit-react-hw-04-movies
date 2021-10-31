@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import s from './Cast.module.css';
 import PropTypes from 'prop-types';
 import moviesAPI from '../../services/moviesApi';
 
@@ -14,10 +15,10 @@ export default function Cast({ movieId }) {
   console.log(movieId);
 
   return casts.length !== 0 ? (
-    <ul>
+    <ul className={s.list}>
       {casts &&
         casts.map(cast => (
-          <li key={cast.id}>
+          <li key={cast.id} className={s.item}>
             {cast.profile_path ? (
               <img
                 src={`${BASE_IMG_URL_CAST}${cast.profile_path}`}
@@ -25,13 +26,13 @@ export default function Cast({ movieId }) {
               />
             ) : (
               <img
-                src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg"
+                src="https://demo.yootheme.com/widgetkit/joomla/images/yootheme/widgetkit/gallery-01.jpg"
                 alt="default_img"
                 width="300"
               />
             )}
-            <p>Character: {cast.character}</p>
-            <p>{cast.name}</p>
+            <p className={s.text}>Character: {cast.character}</p>
+            <p className={s.text}>{cast.name}</p>
           </li>
         ))}
     </ul>

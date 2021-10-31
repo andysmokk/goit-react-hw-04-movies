@@ -22,7 +22,7 @@ const MovieDetailsPage = lazy(() =>
 
 function App() {
   return (
-    <>
+    <section className="container">
       <Navigation />
 
       <Suspense fallback={<h1>Loading...</h1>}>
@@ -44,7 +44,7 @@ function App() {
           </Route>
         </Switch>
       </Suspense>
-    </>
+    </section>
   );
 }
 

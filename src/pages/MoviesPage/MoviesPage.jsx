@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
-// import s from './MoviesPage.module.css';
+import s from './MoviesPage.module.css';
 import moviesAPI from '../../services/moviesApi';
 
 export default function MoviesPage() {
   const history = useHistory();
   const location = useLocation();
+  // eslint-disable-next-line no-unused-vars
   const [movieName, setMovieName] = useState('');
   const [movies, setMovies] = useState([]);
 
@@ -34,16 +35,14 @@ export default function MoviesPage() {
     if (!e.target[0].value) {
       return;
     }
-    // console.log(e.target[0].value);
+
     setMovieName(e.target[0].value);
 
     history.push({
       ...location,
       search: `query=${e.target[0].value}`,
     });
-    // if (!movieName) {
-    //   return;
-    // }
+
     moviesAPI
       .fetchMovie(e.target[0].value)
       .then(movies => setMovies(movies.results))
@@ -51,36 +50,24 @@ export default function MoviesPage() {
       .finally((e.target[0].value = ''));
   };
 
-  // const reset = () => setMovieName('');
-  console.log(movieName);
-  // const onChangeMovieName = ({ target }) => {
-  //   setMovieName(target.value);
-  //   history.push({
-  //     ...location,
-  //     search: `query=${target.value}`,
-  //   });
-  // };
-  // console.log(movies);
   return (
     <>
-      <form onSubmit={onSubmitForm}>
+      <form onSubmit={onSubmitForm} className={s.form}>
         <input
-          // name="movieName"
-          // defaultValue={movieName}
+          className={s.input}
           type="text"
           autoComplete="off"
           autoFocus
           placeholder="Search movie"
-          // onChange={onChangeMovieName}
         />
-        <button type="submit">
+        <button type="submit" className={s.button}>
           <span>Search</span>
         </button>
       </form>
-      <ul>
+      <ul className={s.list}>
         {movies &&
           movies.map(movie => (
-            <li key={movie.id}>
+            <li key={movie.id} className={s.item}>
               <Link
                 to={{
                   pathname: `/movies/${movie.id}`,

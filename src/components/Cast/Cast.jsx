@@ -1,5 +1,3 @@
-// import { Link } from 'react-router-dom';
-// import { useParams } from 'react-router';
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import moviesAPI from '../../services/moviesApi';
@@ -7,14 +5,13 @@ import moviesAPI from '../../services/moviesApi';
 const BASE_IMG_URL_CAST = 'https://image.tmdb.org/t/p/w300';
 
 export default function Cast({ movieId }) {
-  //   const { movieId } = useParams();
   const [casts, setCasts] = useState([]);
 
   useEffect(() => {
     moviesAPI.fetchMovieCast(movieId).then(data => setCasts(data.cast));
   }, [movieId]);
 
-  console.log(casts);
+  console.log(movieId);
 
   return casts.length !== 0 ? (
     <ul>

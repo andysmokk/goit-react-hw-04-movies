@@ -9,16 +9,18 @@ export default function Reviews({ movieId }) {
     moviesAPI.fetchMovieReviews(movieId).then(data => setReviews(data.results));
   }, [movieId]);
 
-  console.log(reviews);
+  console.log(reviews.length);
+  console.log(movieId);
 
   return reviews.length !== 0 ? (
     <ul>
-      {reviews.map(review => (
-        <li key={review.id}>
-          <p>{review.author}</p>
-          <p>{review.content}</p>
-        </li>
-      ))}
+      {reviews &&
+        reviews.map(review => (
+          <li key={review.id}>
+            <p>{review.author}</p>
+            <p>{review.content}</p>
+          </li>
+        ))}
     </ul>
   ) : (
     <p>We don't have any reviews for this movie</p>

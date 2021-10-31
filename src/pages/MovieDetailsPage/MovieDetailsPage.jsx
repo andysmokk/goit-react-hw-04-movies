@@ -2,8 +2,6 @@ import { useState, useEffect, lazy, Suspense } from 'react';
 import { Route, Switch, useParams } from 'react-router';
 import { Link, useRouteMatch, useHistory, useLocation } from 'react-router-dom';
 import moviesAPI from '../../services/moviesApi';
-// import Cast from '../../components/Cast/Cast';
-// import Reviews from '../../components/Reviews/Reviews';
 
 const Cast = lazy(() =>
   import('../../components/Cast/Cast' /* webpackChunkName: "cast_page" */),
@@ -23,16 +21,11 @@ export default function MovieDetailsPage() {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
 
-  // console.log(history);
-  // console.log(location);
-
   useEffect(() => {
     moviesAPI.fetchMovieDetail(movieId).then(movie => setMovie(movie));
   }, [movieId]);
 
-  // console.log(movie);
-
-  const onClickGoBack = e => {
+  const onClickGoBack = () => {
     history.push(location?.state?.from?.location ?? '/');
     // history.goBack();
   };

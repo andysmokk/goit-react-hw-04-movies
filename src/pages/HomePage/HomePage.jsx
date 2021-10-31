@@ -4,7 +4,7 @@ import moviesAPI from '../../services/moviesApi';
 
 export default function HomePage() {
   const location = useLocation();
-  const [movies, setMovies] = useState(null);
+  const [movies, setMovies] = useState([]);
 
   useEffect(() => {
     moviesAPI.fetchTrendingMovies().then(movies => setMovies(movies.results));

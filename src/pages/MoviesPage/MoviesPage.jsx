@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 // import s from './MoviesPage.module.css';
 import moviesAPI from '../../services/moviesApi';
 
-export function MoviesPage() {
+export default function MoviesPage() {
   const history = useHistory();
   const location = useLocation();
   const [movieName, setMovieName] = useState('');

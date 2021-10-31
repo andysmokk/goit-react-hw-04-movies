@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import moviesAPI from '../../services/moviesApi';
 
-export function HomePage() {
+export default function HomePage() {
   const location = useLocation();
   const [movies, setMovies] = useState(null);
 

@@ -1,13 +1,22 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { Route, Switch, useParams } from 'react-router';
 import { Link, useRouteMatch, useHistory, useLocation } from 'react-router-dom';
 import moviesAPI from '../../services/moviesApi';
-import Cast from '../../components/Cast/Cast';
-import Reviews from '../../components/Reviews/Reviews';
+// import Cast from '../../components/Cast/Cast';
+// import Reviews from '../../components/Reviews/Reviews';
+
+const Cast = lazy(() =>
+  import('../../components/Cast/Cast' /* webpackChunkName: "cast_page" */),
+);
+const Reviews = lazy(() =>
+  import(
+    '../../components/Reviews/Reviews' /* webpackChunkName: "reviews_page" */
+  ),
+);
 
 const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w500';
 
-export function MovieDetailsPage() {
+export default function MovieDetailsPage() {
   const match = useRouteMatch();
   const history = useHistory();
   const location = useLocation();
@@ -89,15 +98,18 @@ export function MovieDetailsPage() {
         </ul>
         <hr />
       </div>
-      <Switch>
-        <Route path={`${match.path}/cast`}>
-          <Cast movieId={movieId} />
-        </Route>
 
-        <Route path={`${match.path}/reviews`}>
-          <Reviews movieId={movieId} />
-        </Route>
-      </Switch>
+      <Suspense fallback={<h2>Loading...</h2>}>
+        <Switch>
+          <Route path={`${match.path}/cast`}>
+            <Cast movieId={movieId} />
+          </Route>
+
+          <Route path={`${match.path}/reviews`}>
+            <Reviews movieId={movieId} />
+          </Route>
+        </Switch>
+      </Suspense>
     </>
   );
 }

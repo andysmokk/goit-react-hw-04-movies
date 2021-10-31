@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/pages/HomePage/HomePage.module.css"],"names":[],"mappings":"AAAA,uBACE,kBACF,CAEA,sBACE,eAAgB,CAChB,SACF,CAEA,sBACE,WACF","file":"home_page.c5a49a6a.chunk.css","sourcesContent":[".title {\n  margin-bottom: 15px;\n}\n\n.list {\n  list-style: none;\n  padding: 0;\n}\n\n.item {\n  padding: 4px;\n}\n"]}

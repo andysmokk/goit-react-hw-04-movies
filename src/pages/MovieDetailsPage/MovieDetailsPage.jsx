@@ -80,7 +80,7 @@ export default function MovieDetailsPage() {
               to={{
                 pathname: `${match.url}/cast`,
                 state: {
-                  from: { location, label: 'GO BACK' },
+                  from: { ...location, label: 'GO BACK' },
                 },
               }}
             >
@@ -93,7 +93,7 @@ export default function MovieDetailsPage() {
               to={{
                 pathname: `${match.url}/reviews`,
                 state: {
-                  from: { location, label: 'GO BACK' },
+                  from: { ...location, label: 'GO BACK' },
                 },
               }}
             >
